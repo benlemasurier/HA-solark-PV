@@ -250,6 +250,13 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         state_class=STATE_CLASS_MEASUREMENT,
     ),
 
+    "InvOutputFreq": SolArkModbusSensorEntityDescription(
+        name="Inverter Output Frequency",
+        key="inv_out_freq",
+        native_unit_of_measurement=FREQUENCY_HERTZ,
+        state_class=STATE_CLASS_MEASUREMENT,
+    ),
+
     "LoadL1N_V": SolArkModbusSensorEntityDescription(
         name="Load L1-N Voltage",
         key="loadl1n_v",
@@ -470,6 +477,13 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         device_class=SensorDeviceClass.CURRENT,
         state_class=STATE_CLASS_MEASUREMENT,
         entity_registry_enabled_default=False,
+    ),
+
+    "LoadFreq": SolArkModbusSensorEntityDescription(
+        name="Load Frequency",
+        key="load_freq",
+        native_unit_of_measurement=FREQUENCY_HERTZ,
+        state_class=STATE_CLASS_MEASUREMENT,
     ),
 
     "GenL1L2_V": SolArkModbusSensorEntityDescription(

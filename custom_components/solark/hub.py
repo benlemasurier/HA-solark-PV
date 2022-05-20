@@ -273,6 +273,13 @@ class SolArkModbusHub(DataUpdateCoordinator[dict]):
             # R190
             data["batt_p"] = decoder.decode_16bit_int()
             data["batt_c"] = decoder.decode_16bit_int() / 100.0
+
+            # R192 - Load Frequency
+            data["load_freq"] = decoder.decode_16bit_uint() / 100.0
+
+            # R193 - Inverter Output Frequency
+            data["inv_out_freq"] = decoder.decode_16bit_uint() / 100.0
+
             updated = True
 
         # If there was no response to any read request then return no data.
