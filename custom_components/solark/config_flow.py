@@ -17,7 +17,6 @@ DATA_SCHEMA = vol.Schema(
 )
 
 
-
 @callback
 def solark_modbus_entries(hass: HomeAssistant):
     """Return the hosts already configured."""
@@ -26,28 +25,24 @@ def solark_modbus_entries(hass: HomeAssistant):
     }
 
 
-
 def host_valid(netloc):
-    
-    parsed=urlparse(f'//{netloc}')
-    
+
+    parsed = urlparse(f'//{netloc}')
+
     try:
-        #If it not a URL it might be a serial port.
-        if (parsed.port is None) and ((parsed.hostname is None) or (parsed.hostname[0:3] == "com" )):
+        # If it not a URL it might be a serial port.
+        if (parsed.port is None) and ((parsed.hostname is None) or (parsed.hostname[0:3] == "com")):
             return True
-            
-    #Hostname made no sense.  Error return
-    except:
+
+    # Hostname made no sense.  Error return
+    except BaseException:
         return False
 
-    return True            
-
-
+    return True
 
 
 class SolArkModbusConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """SolArk Modbus configflow."""
-
 
     VERSION = 1
     CONNECTION_CLASS = config_entries.CONN_CLASS_LOCAL_POLL

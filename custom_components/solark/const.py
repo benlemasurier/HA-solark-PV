@@ -31,6 +31,7 @@ ATTR_MANUFACTURER = "SolArk"
 class SolArkModbusSensorEntityDescription(SensorEntityDescription):
     """A class that describes SolArk sensor entities."""
 
+
 SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
     "SN": SolArkModbusSensorEntityDescription(
         name="Serial Number",
@@ -38,7 +39,7 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         icon="mdi:information-outline",
         entity_registry_enabled_default=False,
     ),
- 
+
     "FaultMSG": SolArkModbusSensorEntityDescription(
         name="Inverter error message",
         key="faultmsg",
@@ -343,7 +344,7 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         device_class=SensorDeviceClass.POWER,
         state_class=STATE_CLASS_MEASUREMENT,
         entity_registry_enabled_default=False,
-  ),
+    ),
 
 
     "GridL2_P": SolArkModbusSensorEntityDescription(
@@ -393,7 +394,7 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         device_class=SensorDeviceClass.POWER,
         state_class=STATE_CLASS_MEASUREMENT,
         entity_registry_enabled_default=False,
-  ),
+    ),
 
     "InvL1_P": SolArkModbusSensorEntityDescription(
         name="Inverter L1 Power",
@@ -570,17 +571,17 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
 }
 
 FAULT_MESSAGES = {
-        0b000000000000000000000000010000000: "F08 GFCI Relay Failure",
-        0b000000000000000000001000000000000: "F13 Grid Mode Changed",
-        0b000000000000000000010000000000000: "F14 DC Over Current",
-        0b000000000000000000100000000000000: "F15 Software AC Over Current",
-        0b000000000000000001000000000000000: "F16 GFCI Detection",
-        0b000000000000000100000000000000000: "F18 Hardware AC Over Current",
-        0b000000000000010000000000000000000: "F20 DC Over Current",
-        0b000000000001000000000000000000000: "F22 Emergency Stop",
-        0b000000000010000000000000000000000: "F23 GFCI Overcurrent",
-        0b000000000100000000000000000000000: "F24 DC Insulation (ISO)",
-        0b000000010000000000000000000000000: "F26 Bus Unbalance",
-        0b000010000000000000000000000000000: "F29 Paralleled System",
-        0b100000000000000000000000000000000: "F33 AC Over Current"
+    0b000000000000000000000000010000000: "F08 GFCI Relay Failure",
+    0b000000000000000000001000000000000: "F13 Grid Mode Changed",
+    0b000000000000000000010000000000000: "F14 DC Over Current",
+    0b000000000000000000100000000000000: "F15 Software AC Over Current",
+    0b000000000000000001000000000000000: "F16 GFCI Detection",
+    0b000000000000000100000000000000000: "F18 Hardware AC Over Current",
+    0b000000000000010000000000000000000: "F20 DC Over Current",
+    0b000000000001000000000000000000000: "F22 Emergency Stop",
+    0b000000000010000000000000000000000: "F23 GFCI Overcurrent",
+    0b000000000100000000000000000000000: "F24 DC Insulation (ISO)",
+    0b000000010000000000000000000000000: "F26 Bus Unbalance",
+    0b000010000000000000000000000000000: "F29 Paralleled System",
+    0b100000000000000000000000000000000: "F33 AC Over Current"
 }
