@@ -248,7 +248,11 @@ class SolArkModbusHub(DataUpdateCoordinator[dict]):
             data["batttempc"] = (decoder.decode_16bit_uint() - 1000) / 10.0
             data["batt_v"] = decoder.decode_16bit_uint() / 100.0
             data["batt_soc"] = decoder.decode_16bit_uint()
+
+            # TODO: R185, value exists but documented as "undefined"
             decoder.skip_bytes(2)
+
+            # R186-7 PV1,2 Input Power
             pv1_p = decoder.decode_16bit_uint()        
             pv2_p = decoder.decode_16bit_uint()       
             pv3_p = decoder.decode_16bit_uint()
@@ -257,6 +261,8 @@ class SolArkModbusHub(DataUpdateCoordinator[dict]):
             data["pv3_p"] = pv3_p
             data["pv_p"] = pv1_p+pv2_p+pv3_p;
             updated=True
+
+            # TODO: R188,189 likely PV3,4 Input Power
 
         realtime_data = self._read_holding_registers(unit=1, address=190, count=6)
         if not realtime_data.isError():
