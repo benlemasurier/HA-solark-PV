@@ -18,6 +18,7 @@ from homeassistant.const import (
     POWER_WATT,
     TEMP_CELSIUS,
     TIME_HOURS,
+    TIME_SECONDS,
 )
 
 DOMAIN = "solark_modbus"
@@ -52,6 +53,24 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=STATE_CLASS_TOTAL,
+        entity_registry_enabled_default=False,
+    ),
+
+    "DailyInvReactive_E": SolArkModbusSensorEntityDescription(
+        name="Daily Inverter Reactive Energy",
+        key="dailyinv_reactive_e",
+        native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
+        device_class=SensorDeviceClass.ENERGY,
+        state_class=STATE_CLASS_TOTAL,
+        entity_registry_enabled_default=False,
+    ),
+
+    "DailyGridWorkTime": SolArkModbusSensorEntityDescription(
+        name="Daily Grid Work Time",
+        key="daily_grid_work_seconds",
+        native_unit_of_measurement=TIME_SECONDS,
+        device_class=SensorDeviceClass.DURATION,
+        state_class=STATE_CLASS_TOTAL_INCREASING,
         entity_registry_enabled_default=False,
     ),
 

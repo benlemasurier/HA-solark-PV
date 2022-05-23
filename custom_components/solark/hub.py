@@ -140,8 +140,17 @@ class SolArkModbusHub(DataUpdateCoordinator[dict]):
                 realtime_data.registers, byteorder=Endian.Big, wordorder=Endian.Little
             )
 
+            # R60 - Day Active Power (Wh)
             data["dailyinv_e"] = decoder.decode_16bit_int() / 10.0
-            decoder.skip_bytes(4)
+
+            # R61 - Day Reactive Power (Wh) (unverified)
+            data["dailyinv_reactive_e"] = decoder.decode_16bit_int() / 10.0
+
+            # R62 - Day Grid Work Time (seconds) (unverified)
+            data["daily_grid_work_seconds"] = decoder.decode_16bit_uint()
+
+            decoder.skip_bytes(2)
+
             data["totalgrid_e"] = decoder.decode_32bit_int() / 10.0
             decoder.skip_bytes(10)
             data["daybattc_e"] = decoder.decode_16bit_uint() / 10.0
@@ -207,6 +216,8 @@ class SolArkModbusHub(DataUpdateCoordinator[dict]):
             data["invl1l2_v"] = decoder.decode_16bit_uint() / 10.0
             data["loadl1n_v"] = decoder.decode_16bit_uint() / 10.0
             data["loadl2n_v"] = decoder.decode_16bit_uint() / 10.0
+
+            # R159 (reserved)
             decoder.skip_bytes(2)
 
             # R160
