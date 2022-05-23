@@ -175,6 +175,19 @@ class SolArkModbusHub(DataUpdateCoordinator[dict]):
             data["totalload_e"] = decoder.decode_32bit_uint() / 10.0
             updated = True
 
+        realtime_data = self._read_holding_registers(unit=1, address=90, count=2)
+        if not realtime_data.isError():
+            decoder = BinaryPayloadDecoder.fromRegisters(
+                realtime_data.registers, byteorder=Endian.Big, wordorder=Endian.Little
+            )
+
+            # R90 - DC/DC Transformer Temperature (C, 0.1deg)
+            data["dcdc_temp_c"] = (decoder.decode_16bit_uint() - 1000) / 10
+
+            # R91 - IGBT Heat Sink Temperature
+            data["igbt_temp_c"] = (decoder.decode_16bit_uint() - 1000) / 10
+            updated = True
+
         realtime_data = self._read_holding_registers(unit=1, address=96, count=21)
         if not realtime_data.isError():
             decoder = BinaryPayloadDecoder.fromRegisters(

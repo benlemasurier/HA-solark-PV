@@ -129,6 +129,24 @@ SENSOR_TYPES: dict[str, list[SolArkModbusSensorEntityDescription]] = {
         state_class=STATE_CLASS_MEASUREMENT,
     ),
 
+    "DCDC_Temp": SolArkModbusSensorEntityDescription(
+        name="DC/DC Transformer Temperature",
+        key="dcdc_temp_c",
+        native_unit_of_measurement=TEMP_CELSIUS,
+        device_class=SensorDeviceClass.TEMPERATURE,
+        state_class=STATE_CLASS_MEASUREMENT,
+        entity_registry_enabled_default=False,
+    ),
+
+    "IGBT_Temp": SolArkModbusSensorEntityDescription(
+        name="IGBT Heat Sink Temperature",
+        key="igbt_temp_c",
+        native_unit_of_measurement=TEMP_CELSIUS,
+        device_class=SensorDeviceClass.TEMPERATURE,
+        state_class=STATE_CLASS_MEASUREMENT,
+        entity_registry_enabled_default=False,
+    ),
+
     "TotalLoad_E": SolArkModbusSensorEntityDescription(
         name="Total Load Energy",
         key="totalload_e",
